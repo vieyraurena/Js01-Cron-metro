@@ -5,15 +5,27 @@
 console.log('Esto es un cronómetro!');
 
 let intervalId;
-let seconds = 0;
-const crono = document.getElementById('cronometro');
+let ss = 0;
+let mm = 0;
+let hh = 0;
+const crono = document.getElementById ('cronometro');
+
 
 function move () {
-  crono.innerHTML = seconds++;
+  crono.innerHTML = ss++;
+  if (ss == 60) {
+    ss = 0;
+    crono.innerHTML = mm++;
+  }
+  if ( mm == 60) {
+    mm = 0;
+    crono.innerHTML = hh++;
+  }
+  crono.innerHTML = `${hh}: ${mm}: ${ss}:`;
 }
 
 function start () {
-  intervalId = window.setInterval(move, 1000)
+  intervalId = window.setInterval(move, 1000);
 }
 
 function stop () {
@@ -22,8 +34,10 @@ function stop () {
 
 function clear () {
   window.clearTimeout(intervalId);
-  seconds = 0
-  crono.innerHTML = 0;
+  ss = 0;
+  mm = 0;
+  hh = 0;
+  crono.innerHTML = `00: 00: 00:`;
 }
 
 const iniciar = document.getElementById('iniciar');
